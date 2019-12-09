@@ -13,7 +13,10 @@
                         'Elixir.EthanWeb.PageController',
                         'Elixir.EthanWeb.PageView','Elixir.EthanWeb.Router',
                         'Elixir.EthanWeb.Router.Helpers',
-                        'Elixir.EthanWeb.UserSocket']},
+                        'Elixir.EthanWeb.UserController',
+                        'Elixir.EthanWeb.UserSocket',
+                        'Elixir.EthanWeb.UserView','Elixir.Rumbl.Accounts',
+                        'Elixir.Rumbl.Accounts.User']},
               {registered,[]},
               {vsn,"0.1.0"},
               {mod,{'Elixir.Ethan.Application',[]}}]}.

@@ -16,6 +16,8 @@ defmodule EthanWeb.Router do
   scope "/", EthanWeb do
     pipe_through :browser
 
+    get "/users", PageController, :index
+    get "/users/:id", UserController, :show
     get "/", PageController, :index
   end
 
