@@ -10,6 +10,8 @@ import Html.Attributes exposing (..)
 import Url
 
 -- Main
+
+
 main : Program () Model Msg
 main =
   Browser.application
@@ -42,15 +44,17 @@ type alias Player =
     , phrase : String
     }
 
-ethan : Player
-
-ethan = { name = "ethan", limbs = 0, phrase = "_" }
-
--- gameId should be set to 0 for the duration of a game and assigned a val when the game concludes, iterating off the latest concluded game
--- gameId ties all players who shared a game together to the result of that game
-type User 
-  = Persistent Player { gameId : Int, gamesWon : Int}
+type User
+  = Persistent Player { password : String }
   | Guest Player
+
+ethanGuest : Player
+
+ethanGuest = { name = "ethanGuest", limbs = 0, phrase = "_" }
+
+--ethanUser : User
+-- ToDO: test this data model by passing player through User
+-- ethanUser = { password = "password", name = "ethanRegular", limbs = 0, phrase = "_" }
 
 type alias Ledger =
   { gameId : Int
