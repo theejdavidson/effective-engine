@@ -32,25 +32,40 @@ type alias Model =
   , name : String
   , password : String
   , passwordAgain : String
+  , userList : List Player
   }
 
 init : () -> Url.Url -> Nav.Key -> ( Model, Cmd Msg )
 init flags url key =
-  ( Model key url "" "" "", Cmd.none )
+  ( Model key url "" "" "" [], Cmd.none )
 
-type alias Player =
-    { name : String
-    , limbs : Int
-    , phrase : String
-    }
-
-type User
-  = Persistent Player { password : String }
-  | Guest Player
+type Player
+  = Persistent { name : String, limbs : Int, phrase : String, password : String }
+  | Guest {name : String, limbs : Int, phrase : String }
 
 ethanGuest : Player
+ethanGuest = Guest { name = "ethanGuest", limbs = 0, phrase = "_" }
 
-ethanGuest = { name = "ethanGuest", limbs = 0, phrase = "_" }
+persistentComputer : Player
+persistentComputer = Persistent { name = "hangmenBot", limbs = 0, phrase = "_", password = "beepBoop0101"}
+
+ethanPersistent : Player
+ethanPersistent = Persistent { name = "ethanPersistent", limbs = 0, phrase = "_", password = "password"}
+
+playerList : List Player
+playerList = []
+
+{-}
+addPlayer : List Player -> List Player
+
+addPlayer user =
+  case user of
+    Persistent { name, limbs, phrase} ->
+
+
+    Guest playerInfo ->
+      playerInfo :: playerList
+-}
 
 --ethanUser : User
 -- ToDO: test this data model by passing player through User
@@ -58,8 +73,8 @@ ethanGuest = { name = "ethanGuest", limbs = 0, phrase = "_" }
 
 type alias Ledger =
   { gameId : Int
-    , winner : User
-    , players : List User
+    , winner : Player
+    , players : List Player
   }
 
 
@@ -131,6 +146,9 @@ view model =
           , viewInput "text" "password (optional)" model.password Password
           , viewInput "text" "password again (first time users)" model.passwordAgain PasswordAgain
           , viewValidation model
+          ]
+      , div []
+          [ -- display players list
           ]
       ]
   }
