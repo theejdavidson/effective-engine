@@ -57,8 +57,25 @@ type Player -- Limbs, Username, Phrase, (following are optional) Password (x2 fo
 ethanGuest : Player
 ethanGuest = Guest 0 "ethanGuest" "accordion"
 
-playerList : List Player
-playerList = []
+addPlayer : Player -> Model -> Model
+addPlayer playerList model =
+  case playerList of
+      Persistent limbs name phrase password ->
+          { model
+            | playerList = model.playerList ++ [ Persistent 0 name phrase password ]
+          }
+  
+      Guest limbs name phrase ->
+          { model
+              | playerList = model.playerList ++ [ Guest 0 name phrase ]
+          }
+      
+      NewPersistent limbs name phrase password passwordAgain email->
+          { model
+              | playerList = model.playerList ++ [ NewPersistent 0 name phrase password passwordAgain email]
+          }
+
+
 
 type alias Ledger =
   { gameId : Int
@@ -145,7 +162,7 @@ view model =
           , viewMaybeInput "text" "password again" model.passwordAgain PasswordAgain
           , viewMaybeInput "text" "email address" model.email Email
           , viewValidation model
-          , button [ ] [ text "Add Player" ]
+          --, button [ onClick addPlayer ] [ text "Add Player" ]
           ]
       , div []
           [ -- display players list
