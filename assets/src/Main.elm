@@ -136,10 +136,11 @@ view : Model -> Browser.Document Msg
 view model =
   { title = "Hangmen"
   , body =
-      [ div []
+      [ div [] [ header model ]
+      , div []
           [ viewInput "text" "Player Name" model.name Name
           , viewInput "text" "Phrase" model.phrase Phrase
-          , viewMaybeInput "text" "password (optional)" model.password Password
+          , viewMaybeInput "text" "password (leave blank for guest login)" model.password Password
           , text "First time players:"
           , viewMaybeInput "text" "password again" model.passwordAgain PasswordAgain
           , viewMaybeInput "text" "email address" model.email Email
